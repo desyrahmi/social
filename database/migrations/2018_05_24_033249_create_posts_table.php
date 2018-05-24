@@ -11,12 +11,17 @@ class CreatePostsTable extends Migration
      *
      * @return void
      */
-    public function up()
-    {
+    public function up() {
+      if(!(Schema::hasTable('posts'))) {
         Schema::create('posts', function (Blueprint $table) {
-            $table->increments('id');
-            $table->timestamps();
+          $table->increments('id');
+          $table->string('title');
+          $table->string('content');
+          $table->integer('user_id')->unsigned();
+          $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+          $table->timestamps();
         });
+      }
     }
 
     /**
@@ -24,8 +29,9 @@ class CreatePostsTable extends Migration
      *
      * @return void
      */
-    public function down()
-    {
+    public function down() {
+      if(Schema::hasTable('posts')) {
         Schema::dropIfExists('posts');
+      }
     }
 }

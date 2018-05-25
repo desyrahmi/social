@@ -10,7 +10,11 @@ class Role extends EntrustRole
   protected $dates = ['created_at','updated_at'];
   protected $fillable = ['name', 'display_name', 'description'];
   
-  public function roles() {
-  	return $this->belongsToMany('App\Models\User', 'role_id', 'user_id', 'id');
+  public function users() {
+  	return $this->belongsToMany('App\Models\User', 'role_user', 'user_id', 'role_id');
+  }
+
+  public function permissions() {
+  	return $this->belongsToMany('App\Models\Permission', 'permission_role', 'permission_id', 'role_id');
   }
 }

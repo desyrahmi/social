@@ -37,15 +37,19 @@ class AuthController extends Controller {
   	  );
   	  if(Auth::attempt(array('email' => $userdata['userlogin'], 'password' => $userdata['password']), true)) {
   	  	Session::flash('Success', 'Welcome!');
-  	  	return redirect()->route('index');
+  	  	return redirect()->route('dashboard');
   	  } elseif(Auth::attempt(array('username' => $userdata['userlogin'], 'password' => $userdata['password']), true)) {
   	  	Session::flash('Success', 'Welcome!');
-  	  	return redirect()->route('index');
+  	  	return redirect()->route('dashboard');
   	  } else {
   	  	Session::flash('Fail', 'The username and password you entered did not match our records. Please double-check and try again.');
   	  	return redirect()->route('login');
   	  }
   	}
+  }
+
+  public function dashboard() {
+    return view('index');
   }
 
   public function signup() {
@@ -99,5 +103,10 @@ class AuthController extends Controller {
   	  	return redirect()->route('signup');
   	  }
   	}
+  }
+
+  public function logout() {
+    Auth::logout();
+    return redirect()->route('index');
   }
 }

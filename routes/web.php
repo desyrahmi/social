@@ -26,8 +26,7 @@ Route::group(['middleware' => ['web']], function(){
   });
 
   Route::group(['middleware' => ['auth']], function(){
-  	Route::get('/', function() {
-  	  return view('index');
-  	});
+    Route::get('/', ['uses' => 'AuthController@dashboard', 'as' => 'dashboard']);
+  	Route::get('/logout', ['uses' => 'AuthController@logout', 'as' => 'logout']);
   });
 });

@@ -19,11 +19,11 @@
   <div class="box-body">
   	<div class="row">
   	  <div class="col-md-2 col-xs-2">
-  	  	<img src="{{URL::asset('images/avatar2.png')}}" class="img-circle pull-right" alt="User Image">
+  	  	<img src="{{URL::asset('images/avatar2.png')}}" class="img-circle pull-right" style="max-width: 100%" alt="User Image">
   	  </div>
   	  <div class="col-md-3 col-xs-3">
-	  	<form class="form-horizontal" action="" method="post">
-	  	  <!-- {{csrf_field()}} -->
+	  	<form class="form-horizontal" action="{{route('user.create')}}" method="post" enctype="multipart/form-data">
+	  	  {{csrf_field()}}
 	  	  <div class="form-group">
 	  	  	<label>First Name</label>
 	  	  	<input type="text" name="first_name" placeholder="Fisrt Name" class="form-control">
@@ -34,7 +34,11 @@
 	  	  </div>
 	  	  <div class="form-group">
 	  	  	<label>Gender</label>
-	  	  	<input type="text" name="gender" placeholder="Male/Female" class="form-control">
+	  	  	<select name="gender" class="form-control">
+	  	  	  <option value="">-- Select Gender --</option>
+	  	  	  <option value="Male">Male</option>
+	  	  	  <option value="Female">Female</option>
+	  	  	</select>
 	  	  </div>
 	  	  <div class="form-group">
 	  	  	<label>Phone Number</label>
@@ -67,14 +71,14 @@
 	  	  @if(Auth::user()->hasRole('admin'))
 	  	  <div class="form-group">
 	  	  	<label>Role</label>
-	  	  	<select name="role">
+	  	  	<select name="role"  class="form-control">
 	  	  	  @foreach($roles as $role)
-	  	  	  <option value="{{$role->name}}">{{$role->display_name}}</option>
+	  	  	  <option value="{{$role->id}}">{{$role->display_name}}</option>
 	  	  	  @endforeach
 	  	  	</select>
 	  	  </div>
 	  	  @endif
-	  	  <div class="col-md-4 col-xs-4 pull-right"><a href="" class="btn btn-danger btn-block">Save</a></div>
+	  	  <button class="btn btn-danger pull-right">Save</button>
 	  	</form>
   	  </div>
   	</div>

@@ -26,14 +26,18 @@ Route::group(['middleware' => ['web']], function(){
   Route::group(['middleware' => ['auth']], function(){
     Route::get('/', ['uses' => 'AuthController@dashboard', 'as' => 'dashboard']);
     Route::get('/profile/{id}', ['uses' => 'UserController@profile', 'as' => 'profile']);
-    Route::get('/update/{id}', ['uses' => 'UserController@edit', 'as' => 'edit']);
-  	Route::post('/update/{id}', ['uses' => 'UserController@update', 'as' => 'update']);
+    // Route::get('/update/{id}', ['uses' => 'UserController@edit', 'as' => 'edit']);
+  	// Route::post('/update/{id}', ['uses' => 'UserController@update', 'as' => 'update']);
     Route::get('/logout', ['uses' => 'AuthController@logout', 'as' => 'logout']);
 
 
     Route::group(['prefix' => 'admin', 'middleware' => ['role:admin']], function() {
       Route::get('/users', ['uses' => 'UserController@index', 'as' => 'users']);
-      Route::get('/users/add', ['uses' => 'UserController@add', 'as' => 'users.add']);
+      Route::get('/user/add', ['uses' => 'UserController@add', 'as' => 'user.add']);
+      Route::post('/user/add', ['uses' => 'UserController@create', 'as' => 'user.create']);
+      Route::get('/user/update/{id}', ['uses' => 'UserController@edit', 'as' => 'user.edit']);
+      Route::post('/user/update/{id}', ['uses' => 'UserController@update', 'as' => 'user.update']);
+      Route::get('/user/delete/{id}', ['uses' => 'UserController@destroy', 'as' => 'user.delete']);
       
       Route::get('/roles', ['uses' => 'RoleController@index', 'as' => 'roles']);
       Route::get('/role/add', ['uses' => 'RoleController@add', 'as' => 'role.add']);

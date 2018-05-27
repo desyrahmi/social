@@ -15,12 +15,12 @@
   <div class="box-header">
   	<h4 class="box-title">{{$user->first_name}} {{$user->last_name}}</h4>
   	<small>Basic Information</small>
-  	<a href="{{route('edit', ['id' => Auth::user()->id])}}" class="btn btn-default pull-right">Update</a>
+  	<a href="{{route('user.edit', ['id' => Auth::user()->id])}}" class="btn btn-default pull-right">Update</a>
   </div>
   <div class="box-body">
   	<div class="row">
   	  <div class="col-md-2 col-xs-2">
-  	  	<img src="{{URL::asset('images/avatar2.png')}}" class="img-circle pull-right" alt="User Image">
+  	  	<img src="{{URL::asset('images/avatar2.png')}}" class="img-circle pull-right" alt="User Image" style="max-width: 100%">
   	  </div>
   	  <div class="col-md-3 col-xs-3">
   	  	<table class="table table-striped table-hover">
@@ -38,7 +38,7 @@
 	  	  </tr>
 	  	  <tr>
 	  	  	<td>Phone Number</td>
-	  	  	<td>{{$user->gender}}</td>
+	  	  	<td>{{$user->phone}}</td>
 	  	  </tr>
 	  	  <tr>
 	  	  	<td>Username</td>

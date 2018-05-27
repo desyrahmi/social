@@ -23,6 +23,28 @@ class UserController extends Controller {
   	return view('users.add', compact('roles'));
   }
 
+  public function create(Request $request) {
+    $fields = array('first_name', 'last_name', 'place_of_birth', 'date_of_birth', 'phone', 'address', 'gender', 'username', 'email', 'password');
+    $user = new User();
+    foreach ($fields as $field) {
+      if($request[$field]) {
+        if($field === 'password') {
+          $user[$field] = bcrypt($request[$field]);
+        } else {
+          $user[$field] = $request[$field];
+        }
+      }
+    }
+    if($user->save()) {
+      // foreach ($request->role as $key => $value) {
+        $user->attachRole($request->role);
+      // }
+      return redirect()->route('users');
+    } else {
+      return redirect()->route('user.add');
+    }
+  }
+
   public function edit($id) {
   	$user = User::find($id);
   	return view('users.update', compact('user'));
@@ -31,7 +53,7 @@ class UserController extends Controller {
   public function update(Request $request) {
   	$fields = array('first_name', 'last_name', 'place_of_birth', 'date_of_birth', 'phone', 'address', 'gender', 'username', 'email', 'password');
   	$user = User::find($request->id);
-  	dd($user);
+  	// dd($user);
   	foreach($fields as $field) {
   	  if($request[$field]) {
   	  	if($field === 'password') {
@@ -42,11 +64,16 @@ class UserController extends Controller {
   	  }
   	}
   	if($user->save()) {
-  	  dd('save');
-  	  return redirect()->route('profile', ['id' => $request->id])->with('success', 'Profile Updated!');
+  	  // dd('save');
+  	  return redirect()->route('users')->with('success', 'Profile Updated!');
   	} else {
-  	  dd('Gagal save');
-  	  return redirect()->route('update', ['id' => $request->id]);
+  	  // dd('Gagal save');
+  	  return redirect()->route('user.edit', ['id' => $request->id]);
   	}
+  }
+
+  public function destroy($id) {
+    User::find($id)->delete();
+    return redirect()->route('users');
   }
 }

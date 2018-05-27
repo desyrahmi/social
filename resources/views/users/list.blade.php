@@ -3,7 +3,7 @@
 
 @section('page')
 <ol class="breadcrumb">
-  <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+  <li><a href="{{route('dashboard')}}"><i class="fa fa-dashboard"></i> Home</a></li>
   <li><a href="#">Examples</a></li>
   <li class="active">Users</li>
 </ol>
@@ -26,7 +26,7 @@
   	  	  <th>Gender</th>
   	  	  <th>Username</th>
   	  	  <th>Email</th>
-  	  	  <th>#</th>
+  	  	  <th>Action</th>
   	  	</tr>
   	  </thead>
   	  <tbody>
@@ -37,7 +37,10 @@
 	  	  	<td>{{$user->gender}}</td>
 	  	  	<td>{{$user->username}}</td>
 	  	  	<td>{{$user->email}}</td>
-	  	  	<td>#</td>
+	  	  	<td>
+            <a href="{{route('user.delete', ['id' => $user->id])}}" class="btn btn-default">delete</a>
+            <a href="{{route('user.edit', ['id' => $user->id])}}" class="btn btn-default">update</a>   
+          </td>
 	  	  </tr>
   	  	@endforeach
   	  </tbody>

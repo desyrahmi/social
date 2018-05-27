@@ -16,7 +16,7 @@ class RoleController extends Controller {
   	$roles = Role::get();
   	return view('roles.list', compact('roles'));
   }
-  
+
   public function add() {
   	$permissions = Permission::get();
   	$initials = new \stdClass();
@@ -62,9 +62,9 @@ class RoleController extends Controller {
     $role->save();
 
     DB::table('permission_role')->where('role_id', $id)->delete();
-      foreach ($request->permissions as $key => $value) {
-        $role->attachPermission($value);
-      }
+    foreach ($request->permissions as $key => $value) {
+      $role->attachPermission($value);
+    }
     
     return redirect()->route('roles')->with('sussess', 'Role Updated!');
   }

@@ -13,12 +13,8 @@ use Validator;
 use Session;
 
 class AuthController extends Controller {
-  public function index() {
-  	return view('welcome');
-  }
-
   public function login() {
-  	return view('login');
+  	return view('form.login');
   }
 
   public function doLogin(Request $request) {
@@ -53,7 +49,7 @@ class AuthController extends Controller {
   }
 
   public function signup() {
-  	return view('register');
+  	return view('form.register');
   }
 
   public function register(Request $request) {
@@ -107,6 +103,6 @@ class AuthController extends Controller {
 
   public function logout() {
     Auth::logout();
-    return redirect()->route('index');
+    return redirect()->route('dashboard');
   }
 }

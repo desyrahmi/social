@@ -24,11 +24,17 @@
     </div>
     <div class="col-md-6 col-xs-6">
       <div class="register-box-body modal-dialog">
-        <form class="container" action="{{route('register')}}" class="" method="post">
+        <form class="container" action="{{route('register')}}" method="post">
           {{csrf_field()}}
           <div class="col-md-5 col-xs-5 text-center">
             <div class="header">
               <h1 class="title">Sign Up</h1>          
+            </div>
+            <div class="form-group">
+              <input type="text" name="first_name" placeholder="First Name" class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="text" name="last_name" placeholder="Last Name" class="form-control">
             </div>
             <div class="form-group">
               <input type="text" name="email" placeholder="Email" class="form-control">
@@ -51,10 +57,7 @@
   
   <div class="content"></div>
 
-  <footer class="footer">
-    <strong>Copyright &copy; 2014-2016 <a href="#">Almsaeed Studio</a>.</strong> All rights
-    reserved.
-  </footer>
+  @include('layouts.footer')
 </div>
 
 <script type="text/javascript" src="{{asset('js/app.js')}}"></script>

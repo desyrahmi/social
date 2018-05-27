@@ -23,7 +23,7 @@
     </div>
     <div class="col-md-6 col-xs-6">
       <div class="content">
-        <form action="{{route('doLogin')}}" method="post">
+        <form action="{{route('doLogin')}}" method="post" enctype="multipart/form-data">
           {{csrf_field()}}
           <div class="row">
               <div class="col-md-4 col-xs-4">

@@ -37,6 +37,7 @@ Route::group(['middleware' => ['web']], function(){
       
       Route::get('/roles', ['uses' => 'RoleController@index', 'as' => 'roles']);
       Route::get('/role/add', ['uses' => 'RoleController@add', 'as' => 'role.add']);
+      Route::post('/role/add', ['uses' => 'RoleController@create', 'as' => 'role.create']);
       Route::get('/role/delete/{id}', ['uses' => 'RoleController@destroy', 'as' => 'role.delete']);
       Route::get('/role/update/{id}', ['uses' => 'RoleController@edit', 'as' => 'role.edit']);
       Route::post('/role/update/{id}', ['uses' => 'RoleController@update', 'as' => 'role.update']);

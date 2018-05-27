@@ -18,11 +18,11 @@
   </div>
   <div class="box-body">
   	<div class="row">
-  	  <div class="col-lg-2 col-md-3 col-sm-2 col-xs-4">
+  	  <div class="col-lg-2 col-md-3 col-sm-2 col-md-offset-1">
   	  	<img src="{{URL::asset('images/avatar2.png')}}" class="img-circle pull-right" alt="User Image">
   	  </div>
   	  <div class="col-lg-3 col-md-3 col-sm-3 col-xs-7">
-	  	<form class="form-horizontal" action="{{ action('RoleController@create') }}" method="post" enctype="multipart/form-data">
+	  	<form class="form-horizontal" action="{{route('role.create')}}" method="post" enctype="multipart/form-data">
 	  	  <input name="_token" type="hidden" value="{{ csrf_token() }}"/>
 	  	  <div class="form-group">
 	  	  	<label>Role</label>

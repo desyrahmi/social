@@ -29,7 +29,7 @@
       </ul>
     </li>
     @endif
-    <li><a href=""><i class="fa fa-book"></i> <span>Post</span></a></li>
+    <li><a href="{{route('posts')}}"><i class="fa fa-book"></i> <span>Post</span></a></li>
     @if(Auth::user()->hasRole('admin'))
     <li class="header">LABELS</li>
     <li><a href="{{route('roles')}}"><i class="fa fa-circle-o text-red"></i> <span>Role</span></a></li>

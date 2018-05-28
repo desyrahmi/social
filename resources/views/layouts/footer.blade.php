@@ -1,6 +1,3 @@
 <footer class="main-footer">
-  <div class="pull-right hidden-xs">
-    <!-- <b>Version</b> 2.4.0 -->
-  </div>
-  <strong>Copyright &copy; 2018 <a href="#">Social</a>.</strong> Create your own world.
+  <strong>Copyright &copy; 2018 <a href="{{route('dashboard')}}">Social</a>.</strong> Create your own world.
 </footer>

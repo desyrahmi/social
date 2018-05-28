@@ -63,7 +63,6 @@
 	  	  	<input type="email" name="email" value="{{$user->email}}" class="form-control" required>
 	  	  </div>
 	  	  <a href="" class="btn btn-default">Update Password</a>
-	  	  <!-- <button class="btn btn-danger pull-right" data-toggel="modal" data-target="#update">Save</button> -->
 	  	  <a href="#update" data-toggle="modal" class="btn btn-danger pull-right">Save</a>
 	  	  <div class="modal fade" id="update">
 	  	  	<div class="modal-content modal-dialog col-md-offset-3">

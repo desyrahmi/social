@@ -24,7 +24,7 @@
     </div>
     <div class="col-md-6 col-xs-6">
       <div class="register-box-body modal-dialog">
-        <form class="container" action="{{route('register')}}" method="post">
+        <form class="container" action="{{route('register')}}" method="post" enctype="multipart/form-data">
           {{csrf_field()}}
           <div class="col-md-5 col-xs-5 text-center">
             <div class="header">
@@ -43,7 +43,7 @@
               <input type="password" name="password" placeholder="Password" class="form-control">
             </div>
             <div class="form-group">
-              <input type="password" name="retype-password" placeholder="Retype Password" class="form-control">
+              <input type="password" name="retypepassword" placeholder="Retype Password" class="form-control">
             </div>
             <div class="form-group">
               <button class="btn btn-default btn-block">Sign Up</button>
@@ -53,12 +53,10 @@
       </div>
     </div>
   </div>
-
-  
-  <div class="content"></div>
-
-  @include('layouts.footer')
 </div>
+<footer style="padding: 15px; margin-top: 150px; background-color: white;">
+  <strong>Copyright &copy; 2018 <a href="{{route('dashboard')}}">Social</a>.</strong> Create your own world.
+</footer>
 
 <script type="text/javascript" src="{{asset('js/app.js')}}"></script>
 </body>

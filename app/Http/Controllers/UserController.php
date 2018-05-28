@@ -36,9 +36,7 @@ class UserController extends Controller {
       }
     }
     if($user->save()) {
-      // foreach ($request->role as $key => $value) {
-        $user->attachRole($request->role);
-      // }
+      $user->attachRole($request->role);
       return redirect()->route('users');
     } else {
       return redirect()->route('user.add');
@@ -53,7 +51,7 @@ class UserController extends Controller {
   public function update(Request $request) {
   	$fields = array('first_name', 'last_name', 'place_of_birth', 'date_of_birth', 'phone', 'address', 'gender', 'username', 'email', 'password');
   	$user = User::find($request->id);
-  	// dd($user);
+
   	foreach($fields as $field) {
   	  if($request[$field]) {
   	  	if($field === 'password') {
@@ -64,10 +62,8 @@ class UserController extends Controller {
   	  }
   	}
   	if($user->save()) {
-  	  // dd('save');
   	  return redirect()->route('users')->with('success', 'Profile Updated!');
   	} else {
-  	  // dd('Gagal save');
   	  return redirect()->route('user.edit', ['id' => $request->id]);
   	}
   }

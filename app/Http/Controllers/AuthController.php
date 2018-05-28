@@ -45,7 +45,8 @@ class AuthController extends Controller {
   }
 
   public function dashboard() {
-    return view('index');
+    $posts = Post::with('user')->orderBy('created_at', 'desc')->get();
+    return view('index', compact('posts'));
   }
 
   public function signup() {
@@ -54,51 +55,36 @@ class AuthController extends Controller {
 
   public function register(Request $request) {
   	$rules = array(
-	  'email' => 'required', 
-	  'password' => 'required', 
-	  'retype-password' => 'required', 
-  	);
+      'first_name' => 'required',
+      'last_name' => 'required',
+      'email' => 'required',
+      'password' => 'required',
+      'retypepassword' => 'required'
+    );
 
-  	$validator = Validator::make($request->all(), $rules);
-  	if($validator->fails()) {
-  	  dd("VALIDATOR");
-  	  return redirect()->route('signup')->withErrors($validator);
-  	} else {
-  	  if($request->input['retype-password'] != $request->input['password']) {
-  	  	dd("SALAH PASSWORD");
-  	  	return redirect()->route('signup')->withErrors('Password miss match');
-  	  }
+    $validator = Validator::make($request->all(), $rules);
 
-  	  $user = new User();
-  	  if($request->first_name != null) {
-  	  	$user->first_name = $request->first_name;
-  	  }
-  	  if($request->last_name != null) {
-  	  	$user->last_name = $request->last_name;
-  	  }
-  	  if($request->place_of_birth != null) {
-  	  	$user->place_of_birth = $request->place_of_birth;
-  	  }
-  	  if($request->date_of_birth != null) {
-  	  	$user->date_of_birth = $request->date_of_birth;
-  	  }
-  	  if($request->gender != null) {
-  	  	$user->gender = $request->gender;
-  	  }
-  	  if($request->address != null) {
-  	  	$user->address = $request->address;
-  	  }
-  	  if($request->username != null) {
-  	  	$user->username = $request->username;
-  	  }
-  	  $user->email = $request->email;
-  	  $user->password = bcrypt($request->password);
-  	  if($user->save()) {
-  	  	return redirect()->route('index');
-  	  } else {
-  	  	return redirect()->route('signup');
-  	  }
-  	}
+    if($validator->fails()) {
+      return redirect()->route('signup')->withErrors($validator);
+    } else {
+      if($request->password != $request->retypepassword) {
+        Session:;flash('fail', 'Password Miss Match');
+      } else {
+        $user = new User();
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        if($user->save()) {
+          $user->attachRole(2);
+          Session::flash('success', 'Regristation Success!');
+          return redirect()->route('dashboard');
+        } else {
+          Session::flash('fail', 'Regristration failed.');
+          return redirect()->route('signup');
+        }
+      }
+    }
   }
 
   public function logout() {

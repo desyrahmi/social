@@ -13,7 +13,11 @@ use Auth;
 
 class PostController extends Controller {
   public function index() {
-  	$posts = Post::get();
+    if(Auth::user()->hasRole('admin')) {
+      $posts = Post::get();
+    } else {
+      $posts = Post::where('user_id', Auth::user()->id)->get();
+    }
   	return view('posts.list', compact('posts'));
   }
 
@@ -53,13 +57,12 @@ class PostController extends Controller {
   	  'title' => 'required',
   	  'content' => 'required'
   	);
-  	// dd($request->id);
+  	
   	$validator = Validator::make($request->all(), $rules);
 
   	if($validator->fails()) {
   	  return redirect()->route('post.edit', ['id' => $request->id]);
   	} else {
-  		// dd('sini');
   	  $post = Post::find($request->id);
   	  $post->title = $request->title;
   	  $post->content = $request->content;

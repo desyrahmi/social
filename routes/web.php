@@ -28,6 +28,14 @@ Route::group(['middleware' => ['web']], function(){
     Route::get('/profile/{id}', ['uses' => 'UserController@profile', 'as' => 'profile']);
     // Route::get('/update/{id}', ['uses' => 'UserController@edit', 'as' => 'edit']);
   	// Route::post('/update/{id}', ['uses' => 'UserController@update', 'as' => 'update']);
+    Route::get('/posts', ['uses' => 'PostController@index', 'as' => 'posts']);
+    Route::get('/post/add', ['uses' => 'PostController@add', 'as' => 'post.add']);
+    Route::post('/post/add', ['uses' => 'PostController@create', 'as' => 'post.create']);
+    Route::get('/post/update/{id}', ['uses' => 'PostController@edit', 'as' => 'post.edit']);
+    Route::post('/post/update/{id}', ['uses' => 'PostController@update', 'as' => 'post.update']);
+    Route::get('/post/delete/{id}', ['uses' => 'PostController@destroy', 'as' => 'post.delete']);
+
+
     Route::get('/logout', ['uses' => 'AuthController@logout', 'as' => 'logout']);
 
 
@@ -46,14 +54,7 @@ Route::group(['middleware' => ['web']], function(){
       Route::post('/user/add', ['uses' => 'UserController@create', 'as' => 'user.create']);
       Route::get('/user/update/{id}', ['uses' => 'UserController@edit', 'as' => 'user.edit']);
       Route::post('/user/update/{id}', ['uses' => 'UserController@update', 'as' => 'user.update']);
-      Route::get('/user/delete/{id}', ['uses' => 'UserController@destroy', 'as' => 'user.delete']);
-      
-      Route::get('/posts', ['uses' => 'PostController@index', 'as' => 'posts']);
-      Route::get('/post/add', ['uses' => 'PostController@add', 'as' => 'post.add']);
-      Route::post('/post/add', ['uses' => 'PostController@create', 'as' => 'post.create']);
-      Route::get('/post/update/{id}', ['uses' => 'PostController@edit', 'as' => 'post.edit']);
-      Route::post('/post/update/{id}', ['uses' => 'PostController@update', 'as' => 'post.update']);
-      Route::get('/post/delete/{id}', ['uses' => 'PostController@destroy', 'as' => 'post.delete']);
+      Route::get('/user/delete/{id}', ['uses' => 'UserController@destroy', 'as' => 'user.delete']);      
     });
   });
 

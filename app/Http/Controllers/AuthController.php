@@ -53,6 +53,16 @@ class AuthController extends Controller {
   	return view('form.register');
   }
 
+  public function checkemail(Request $request) {
+    $email = $request->email;
+    $isExist = User::where('email', $email)->first();
+    if($isExist) {
+      return response()->json(array("exists", true));
+    } else {
+      return response()->json(array("exists", false));
+    }
+  }
+
   public function register(Request $request) {
   	$rules = array(
       'first_name' => 'required',

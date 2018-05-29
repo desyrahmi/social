@@ -15,7 +15,9 @@
 //     return view('welcome');
 // });
 
-Route::group(['middleware' => ['web']], function(){  
+Route::group(['middleware' => ['web']], function(){
+  Route::post('/checkemail', ['uses' => 'AuthController@checkemail']);
+  
   Route::group(['middleware' => ['guest']], function(){    
   	Route::get('/login', ['uses' => 'AuthController@login', 'as' => 'login']);
   	Route::post('/login', ['uses' => 'AuthController@doLogin', 'as' => 'doLogin']);
@@ -26,8 +28,12 @@ Route::group(['middleware' => ['web']], function(){
   Route::group(['middleware' => ['auth']], function(){
     Route::get('/', ['uses' => 'AuthController@dashboard', 'as' => 'dashboard']);
     Route::get('/profile/{id}', ['uses' => 'UserController@profile', 'as' => 'profile']);
-    // Route::get('/update/{id}', ['uses' => 'UserController@edit', 'as' => 'edit']);
-  	// Route::post('/update/{id}', ['uses' => 'UserController@update', 'as' => 'update']);
+    Route::get('/user/update/{id}', ['uses' => 'UserController@edit', 'as' => 'user.edit']);
+    Route::post('/user/update/{id}', ['uses' => 'UserController@update', 'as' => 'user.update']);
+    Route::post('/user/update/pass-user/{id}', ['uses' => 'UserController@updatepassword', 'as' => 'user.updatepass']);
+
+
+
     Route::get('/posts', ['uses' => 'PostController@index', 'as' => 'posts']);
     Route::get('/post/add', ['uses' => 'PostController@add', 'as' => 'post.add']);
     Route::post('/post/add', ['uses' => 'PostController@create', 'as' => 'post.create']);
@@ -52,8 +58,7 @@ Route::group(['middleware' => ['web']], function(){
       Route::get('/users', ['uses' => 'UserController@index', 'as' => 'users']);
       Route::get('/user/add', ['uses' => 'UserController@add', 'as' => 'user.add']);
       Route::post('/user/add', ['uses' => 'UserController@create', 'as' => 'user.create']);
-      Route::get('/user/update/{id}', ['uses' => 'UserController@edit', 'as' => 'user.edit']);
-      Route::post('/user/update/{id}', ['uses' => 'UserController@update', 'as' => 'user.update']);
+      Route::post('/user/update/pass/{id}', ['uses' => 'UserController@updatepasswordadm', 'as' => 'user.updatepassadm']);
       Route::get('/user/delete/{id}', ['uses' => 'UserController@destroy', 'as' => 'user.delete']);      
     });
   });

@@ -37,7 +37,7 @@
               <input type="text" name="last_name" placeholder="Last Name" class="form-control">
             </div>
             <div class="form-group">
-              <input type="text" name="email" placeholder="Email" class="form-control">
+              <input type="text" name="email" placeholder="Email" class="form-control" onblur="checkemail(this)">
             </div>
             <div class="form-group">
               <input type="password" name="password" placeholder="Password" class="form-control">
@@ -59,5 +59,26 @@
 </footer>
 
 <script type="text/javascript" src="{{asset('js/app.js')}}"></script>
+<script type="text/javascript">
+  $(document).ready(function checkEmail(element){
+    const email = $(element).val();
+
+    $.ajax({
+      type : "POST",
+      url : '{{URL('checkemail')}}',
+      data : {email:email},
+      dataType : 'json',
+      success : function(res) {
+        if(res.exists) {
+          alert('true');
+        } else {
+          alert('false');
+        }
+      },
+      error : function(jqXHR, exception) {
+      }
+    });
+  });
+</script>
 </body>
 </html>

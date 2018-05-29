@@ -40,10 +40,17 @@
               <div class="form-group">
                 <label>Gender</label>
                 <select class="form-control" name="gender">
+                  @if(!$user->gender)
+                  <option value="">-- Select Gender--</option>
+                  @else
                   <option value="{{$user->gender}}">{{$user->gender}}</option>
+                  @endif
                   @if($user->gender == "Male")
                   <option value="Female">Female</option>
+                  @elif($user->gender == "Female")
+                  <option value="Male">Male</option>
                   @else
+                  <option value="Female">Female</option>
                   <option value="Male">Male</option>
                   @endif
                 </select>

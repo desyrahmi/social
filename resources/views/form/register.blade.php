@@ -37,7 +37,8 @@
               <input type="text" name="last_name" placeholder="Last Name" class="form-control">
             </div>
             <div class="form-group">
-              <input type="text" name="email" placeholder="Email" class="form-control" onblur="checkemail(this)">
+              <input type="text" name="email" placeholder="Email" class="form-control" id="email">
+              <span id="validate-email"></span>
             </div>
             <div class="form-group">
               <input type="password" name="password" placeholder="Password" class="form-control">
@@ -46,7 +47,7 @@
               <input type="password" name="retypepassword" placeholder="Retype Password" class="form-control">
             </div>
             <div class="form-group">
-              <button class="btn btn-default btn-block">Sign Up</button>
+              <button class="btn btn-default btn-block" id="register">Sign Up</button>
             </div>
           </div>
         </form>
@@ -60,25 +61,36 @@
 
 <script type="text/javascript" src="{{asset('js/app.js')}}"></script>
 <script type="text/javascript">
-  $(document).ready(function checkEmail(element){
-    const email = $(element).val();
-
-    $.ajax({
-      type : "POST",
-      url : '{{URL('checkemail')}}',
-      data : {email:email},
-      dataType : 'json',
-      success : function(res) {
-        if(res.exists) {
-          alert('true');
-        } else {
-          alert('false');
+$(document).ready(function() {
+  $('#email').blur(function() {
+    let validateEmail = '';
+    let email = $('#email').val();
+    let _token = $('input[name="_token"]').val();
+    const filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    if(!filter.test(email)) {
+      $('#error').addClass('has-error');
+      $('#validate-email').html('<label class="text-danger">Invalid Email</label>');
+      $('#register').attr('disabled', true);
+    } else {
+      $.ajax({
+        url: "{{route('email.check')}}",
+        method: "POST",
+        data: {email:email, _token:_token},
+        success: function(result) {
+          if(result == 'unique') {
+            $('#validate-email').html('<label class="text-success">Email Available</label>');
+            $('#email').removeClass('has-error');
+            $('#register').attr('disabled', false);
+          } else {
+            $('#validate-email').html('<label class="text-danger">Email Not Available</label>');
+            $('#email').addClass('has-error');
+            $('#register').attr('disabled', true);
+          }
         }
-      },
-      error : function(jqXHR, exception) {
-      }
-    });
+      });
+    }
   });
+});
 </script>
 </body>
 </html>

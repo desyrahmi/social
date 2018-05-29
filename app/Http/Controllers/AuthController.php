@@ -54,12 +54,14 @@ class AuthController extends Controller {
   }
 
   public function checkemail(Request $request) {
-    $email = $request->email;
-    $isExist = User::where('email', $email)->first();
-    if($isExist) {
-      return response()->json(array("exists", true));
-    } else {
-      return response()->json(array("exists", false));
+    if($request->email) {
+      $email = $request->email;
+      $data = User::where('email', $email)->count();
+      if($data > 0) {
+        echo 'not unique';
+      } else {
+        echo 'unique';
+      }
     }
   }
 

@@ -16,7 +16,7 @@
 // });
 
 Route::group(['middleware' => ['web']], function(){
-  Route::post('/checkemail', ['uses' => 'AuthController@checkemail']);
+  Route::post('/checkemail', ['uses' => 'AuthController@checkemail', 'as' => 'email.check']);
   
   Route::group(['middleware' => ['guest']], function(){    
   	Route::get('/login', ['uses' => 'AuthController@login', 'as' => 'login']);

@@ -15,7 +15,7 @@
   	<h3>Social Permissions</h3>
   </div>
   <div class="box-body">
-  	<table class="table table-hover" id="table-permission">
+  	<table class="table table-hover dataTable" id="table-permission">
       @php
         $index = 1;
       @endphp
@@ -42,4 +42,19 @@
   	</table>
   </div>
 </div>
+@endsection
+
+@section('moreScripts')
+<script type="text/javascript">
+  $(function() {
+    $('#table-permission').DataTable({
+      'paging': true,
+      'lengthChange': false,
+      'searching': true,
+      'ordering': true,
+      'autoWidth': false
+    });
+  });
+</script>
+
 @endsection

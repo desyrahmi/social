@@ -16,7 +16,7 @@
   	<a href="{{route('post.add')}}" class="btn btn-default pull-right">Create Post</a>
   </div>
   <div class="box-body">
-  	<table class="table table-hover" id="table-user">
+  	<table class="table table-hover" id="table-post">
       @php
         $index = 1;
       @endphp
@@ -44,4 +44,19 @@
   	</table>
   </div>
 </div>
+@endsection
+
+@section('moreScripts')
+<script type="text/javascript">
+  $(function() {
+    $('#table-post').DataTable({
+      'paging': true,
+      'lengthChange': false,
+      'searching': true,
+      'ordering': true,
+      'autoWidth': false
+    });
+  });
+</script>
+
 @endsection

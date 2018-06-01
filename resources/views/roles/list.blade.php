@@ -48,3 +48,18 @@
   </div>
 </div>
 @endsection
+
+@section('moreScripts')
+<script type="text/javascript">
+  $(function() {
+    $('#table-role').DataTable({
+      'paging': true,
+      'lengthChange': false,
+      'searching': true,
+      'ordering': true,
+      'autoWidth': false
+    });
+  });
+</script>
+
+@endsection

@@ -993,6 +993,15 @@ var app = new Vue({
   el: '#app'
 });
 
+$('.sidebar-toggle').on('click', function () {
+  var cls = $('body').hasClass('sidebar-collapse');
+  if (cls == true) {
+    $('body').removeClass('sidebar-collapse');
+  } else {
+    $('body').addClass('sidebar-collapse');
+  }
+});
+
 /***/ }),
 /* 11 */
 /***/ (function(module, exports, __webpack_require__) {

@@ -15,7 +15,7 @@
   	<h3>Social Users</h3>
   </div>
   <div class="box-body">
-  	<table class="table table-hover" id="table-user">
+  	<table class="table table-hover dataTable" id="table-user">
       @php
         $index = 1;
       @endphp
@@ -47,4 +47,19 @@
   	</table>
   </div>
 </div>
+@endsection
+
+@section('moreScripts')
+<script type="text/javascript">
+  $(function() {
+    $('#table-user').DataTable({
+      'paging': true,
+      'lengthChange': false,
+      'searching': true,
+      'ordering': true,
+      'autoWidth': false
+    });
+  });
+</script>
+
 @endsection

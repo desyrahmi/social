@@ -10,6 +10,7 @@ use App\Models\User;
 
 use Validator;
 use Auth;
+use Session;
 
 class PostController extends Controller {
   public function index() {
@@ -33,6 +34,7 @@ class PostController extends Controller {
 
   	$validator = Validator::make($request->all(), $rules);
   	if($validator->fails()) {
+      Session::flash('fail', 'Cannot add the post.');
   	  return redirect()->route('post.add');
   	} else {
   	  $post = new Post();
@@ -40,8 +42,10 @@ class PostController extends Controller {
   	  $post->content = $request->content;
   	  $post->user_id = Auth::user()->id;
   	  if($post->save()) {
+        Session::flash('success', 'Post Created.');
   	  	return redirect()->route('dashboard');
   	  } else {
+        Session::flash('fail', 'Cannot add the post.');
   	  	return redirect()->route('post.add');
   	  }
   	}
@@ -67,8 +71,10 @@ class PostController extends Controller {
   	  $post->title = $request->title;
   	  $post->content = $request->content;
   	  if($post->save()) {
+        Session::flash('success', 'Post Updated.');
   	  	return redirect()->route('posts');
   	  } else {
+        Session::flash('fail', 'Cannot update the post.');
   	  	return redirect()->route('post.edit', ['id' => $request->id]);
   	  }
   	}

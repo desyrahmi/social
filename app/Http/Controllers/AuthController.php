@@ -45,7 +45,7 @@ class AuthController extends Controller {
   }
 
   public function dashboard() {
-    $posts = Post::with('user')->orderBy('created_at', 'desc')->get();
+    $posts = Post::with('user')->orderBy('created_at', 'desc')->paginate(5);
     return view('index', compact('posts'));
   }
 
